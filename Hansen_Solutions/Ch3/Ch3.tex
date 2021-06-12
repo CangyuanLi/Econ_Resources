@@ -1,0 +1,97 @@
+\documentclass[14pt]{extreport}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\(\Leftrightarrow\)\qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip \\}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\sum\limits_{i=1}^n}
+\newcommand{\limn}[0]{\lim_{n \to \infty}}
+\newcommand{\limt}[0]{\lim_{t \to \infty}}
+
+\title{Solutions to Chapter 3 Exercises}
+\author{Cangyuan Li}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item [\textbf{3.14}]
+    Let \(\widehat{\beta}_n = \mathbf{(X_n'X_n)^{-1}X_n'Y_n}\) denote the OLS estimate where 
+    \(\mathbf{Y_n}\) is \(n \times 1\) and \(\mathbf{X_n}\) is \(n \times k\). Prove that the OLS estimate 
+    computed using an additional observation \((Y_{n+1}, X_{n+1})\) is 
+
+    \begin{align*}
+        \widehat{\beta}_{n+1} &= \widehat{\beta}_n + \frac{1}{1 + X'_{n+1}(X'_n X_n)^{-1}X_{n+1}}
+        (X'_{n} X_{n})^{-1}X_{n+1}(Y_{n+1} - X'_{n+1}\widehat{\beta}_n)
+    \end{align*}
+
+    \answer
+    Step 1: Apply the Woodbury Matrix Identity. Let 
+
+    \begin{align*}
+        A &= X_n'X_n \\
+        B &= X_{n+1} \\
+        D &= X'_{n+1}
+    \end{align*}
+
+    The choice of \(D\) is a bit arbitrary. I think setting the last term equal to \(C\) would work,
+    but this way the `1' is already present and the equation is a bit easier to manipulate.
+    Then, since \(C = I = 1\) because a single observation is 1 by 1.
+
+    \begin{align*}
+        (A + BCD)^{-1} &= A^{-1} - A^{-1}BC\left(C + CDA^{-1}BC\right)^{-1}CDA^{-1} \\
+        &= A^{-1} - A^{-1}B(1 + DA^{-1}B)DA^{-1} \\
+    \end{align*}
+
+    Step 2: Simplify. The terms of the expanded equation are:
+
+    \begin{align*}
+        Term1 &= A^{-1}X'_nY_n \\
+        &= (X'_n X_n)^{-1}X'_nY_n \\
+        &= \widehat{\beta}_n
+    \end{align*}
+
+    \begin{align*}
+        Term2 &= A^{-1}X_{n+1}Y_{n+1} \\
+        &= (X'_n X_n)^{-1}(X_{n+1} Y_{n+1})
+    \end{align*}
+
+    \begin{align*}
+        Term3 &= (X'_n X_n)^{-1} X_{n+1} \left[1 + X'_{n+1}(X'_n X_n)^{-1}X_{n+1}\right]^{-1}
+                 X'_{n+1}(X'_nX_n)^{-1}X'_nY_n \\
+              &= (X'_n X_n)^{-1}X_{n+1}\left[1 + X'_{n+1}(X'_n X_n)^{-1}X_{n+1}\right]^{-1}
+                 X'_{n_1} \widehat{\beta}_n
+    \end{align*}
+
+    \begin{align*}
+        Term4 &= (X'_n X_n)^{-1} X_{n+1} \left[1 + X'_{n+1}(X'_n X_n)^{-1}X_{n+1}\right]
+                X'_{n+1}(X'_n X_n)^{-1} X_{n+1} Y_{n+1}
+    \end{align*}
+
+    Step 3: Combine terms. Note that the term starting with `1 + ...' is a scalar, call it \(L\). 
+    Call the term \(Z := (X'_n X_n)^{-1} X_{n+1}\). Note also that \(L = 1 + X'_{n+1}Z\). The observations
+    are also scalars and may be rearranged. So:
+
+    \begin{align*}
+        \widehat{\beta}_{n+1} &= Term1 + Term2 - Term3 - Term4 \\
+        &= \widehat{\beta}_n + Z Y_{n+1} - \frac{1}{L} Z X'_{n+1}\widehat{\beta}_n - 
+        \frac{1}{L} Z X'_{n+1} Z Y_{n+1} \\
+        &= \widehat{\beta}_n + ZY_{n+1}\frac{L}{L} - \frac{1}{L} ZZ X'_{n+1} Y_{n+1} - 
+        - \frac{1}{L} Z X'_{n+1}\widehat{\beta}_n \\
+        &= \widehat{\beta}_n + \frac{1}{L}(ZY_{n+1} + ZZ X'_{n+1} Y_{n+1} - ZZ X'_{n+1} Y_{n+1}
+        - Z X'_{n+1}\widehat{\beta}_n) \\
+        &= \widehat{\beta}_n + \frac{1}{L}Z(Y_{n+1 - X'_{n+1\widehat{\beta}_n}})
+    \end{align*}
+    
+\end{enumerate}
+
+\end{document}

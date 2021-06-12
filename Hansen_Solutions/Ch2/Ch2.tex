@@ -1,0 +1,66 @@
+\documentclass[14pt]{extreport}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\(\Leftrightarrow\)\qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip \\}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\sum\limits_{i=1}^n}
+\newcommand{\limn}[0]{\lim_{n \to \infty}}
+\newcommand{\limt}[0]{\lim_{t \to \infty}}
+
+\title{Solutions to Chapter 2 Exercises}
+\author{Cangyuan Li}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{enumerate}
+    \item [\textbf{2.17}] 
+    Let \(X\) be a random variable with \(\mu = \mathbb{E}[X]\) and \(\sigma^2 = var(X)\). 
+    Define
+
+    \begin{align*}
+        g(x, \mu, \sigma^2) = \begin{pmatrix}
+            x - \mu \\
+            (x - \mu^2) - \sigma^2
+        \end{pmatrix}
+    \end{align*}
+
+    Show that \(\mathbb{E}[g(X, \mu, \sigma)] = 0\) if and only if \(m = \mu\) and \(s = \sigma^2\).
+
+    \answer
+    Step 1: Show both set of conditions. Note that \(\mu = \mathbb{E}[X]\) and \(\sigma^2 = var(X)\).
+    It is helpful to write in these terms in order to apply law of iterated expectations.
+
+    \begin{align*}
+        \mathbb{E}[g(X, m, s)] &= \mathbb{E}
+            \begin{pmatrix}
+                X - \mathbb{E}[X] \\
+                (X - \mathbb{E}[X])^2 - var(X)
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                \mathbb{E}[X] - \mathbb{E}[\mathbb{E}[X]] \\
+                (\mathbb{E}[X - \mathbb{E[X]}])^2 - \mathbb{E}[var(X)]
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                \mathbb{E}[X] - \mathbb{E}[X] \\
+                \mathbb{E}[var(X)] - \mathbb{E}[var(X)]
+            \end{pmatrix} \\
+            &= 0
+    \end{align*}
+
+    Step 2:
+    \medskip
+    For example, if \(m \neq \mu\), then the law of iterated expectations would be violated.
+\end{enumerate}
+
+\end{document}
