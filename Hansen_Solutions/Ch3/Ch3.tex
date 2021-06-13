@@ -24,6 +24,74 @@
 \maketitle
 
 \begin{enumerate}
+
+    \item [\textbf{3.05}] Let \( \mathbf{\widehat{e}} \) be the OLS residual from a regression of \( \mathbf{Y} \) on \( \mathbf{X} \). Find the OLS coefficient from a regression of \( \mathbf{\widehat{e}} \) on \( \mathbf{X} \). 
+    
+    \answer
+    Step 1: Here, \( \widehat{e} \) takes the place of \( Y \) in the formula for \( \widehat{\beta} \). 
+
+    \begin{align*}
+        \widetilde{\beta} &= (X'X)^{-1} X'\widehat{e} \\
+        &= (X'X)^{-1} \left[ X'Y - X'X\widehat{\beta} \right] \\
+        &= (X'X)^{-1} \left[ X'Y - X'X (X'X)^{-1} X'Y \right] \\
+        &= (X'X)^{-1} \left[ X'Y - X'Y \right] \\
+        &= 0
+    \end{align*}
+    
+
+    \item [\textbf{3.06}] Let \( \mathbf{\widehat{Y} = X(X'X)^{-1} X'Y} \). Find the OLS coefficient from a regression of \( \mathbf{\widehat{Y}} \) on \( \mathbf{X} \). 
+    
+    \answer
+    Step 1: Plug into regression formula and expand.
+
+    \begin{align*}
+        \widetilde{\beta} &= (X'X)^{-1} X'\widehat{Y} \\
+        &= \left[ (X'X)^{-1} X'X \right] (X'X)^{-1} X'Y \\
+        &= I (X'X)^{-1} X'Y \\
+        &= \widehat{\beta}
+    \end{align*}
+
+
+    \item [\textbf{3.11}] Show that when \( \mathbf{X} \) contains a constant, \( n^{-1} \sumn \widehat{Y}_i = \overline{Y} \).
+
+    \answer
+    Step 1: Note that \( Y_i = \widehat{Y}_i + \widehat{e}_i \). 
+    Also, \( \overline{Y} := n^{-1} \sumn Y_i \).
+
+    \begin{align*}
+        &\sumn Y_i = \sumn \widehat{Y}_i + \sumn \widehat{e}_i \\
+        &\eq n^{-1} \sumn Y_i = n^{-1} \sumn \widehat{Y}_i + n^{-1} \sumn \widehat{e}_i \\
+        &\eq \overline{Y} = n^{-1} \sumn \widehat{Y}_i + n^{-1} \sumn \widehat{e}_i
+    \end{align*}
+
+    Step 2: The equation specified in the problem is then only true if \( \sumn \widehat{e}_i = 0 \). \( X \) is a matrix of the form:
+
+    \begin{align*}
+        \begin{bmatrix}
+            x_{11} & x_{12} & \cdots x_{1, k-1} & 1 \\
+            x_{21} & x_{22} & \cdots x_{2, k-1} & 1 \\
+            \vdots & \vdots & \vdots & \vdots \\
+            x_{n1} & x_{n2} & \cdots x_{n, k-1} & 1
+        \end{bmatrix}
+    \end{align*}
+
+    Partition \( X \) into \( \begin{bmatrix} X^{\ast} & O \end{bmatrix}\) such that \( X^{\ast} \) is a \( n \times k-1 \) matrix of the \( x \) observations and \( O \) is a \( n \times 1 \) vector of ones. We want the sum of the residuals to be zero, and recall that we showed (in matrix form) in Exercise 3.05 that \( X'\widehat{e} = 0 \). Also note that the transpose of a partitioned matrix is like the transpose of a regular matrix except the elements are also transposed. So,
+
+    \begin{align*}
+        X'\widehat{e} &= \begin{bmatrix} 
+            X^{\ast'} \\
+            O'
+        \end{bmatrix} \widehat{e} \\
+        &= \begin{bmatrix}
+            X^{\ast'} \widehat{e} \\
+            O' \widehat{e} 
+        \end{bmatrix} \\
+        &= 0
+    \end{align*}
+
+    Then \( O'\widehat{e} = \sumn \widehat{e}_i = 0 \). 
+
+
     \item [\textbf{3.14}]
     Let \(\widehat{\beta}_n = \mathbf{(X_n'X_n)^{-1}X_n'Y_n}\) denote the OLS estimate where 
     \(\mathbf{Y_n}\) is \(n \times 1\) and \(\mathbf{X_n}\) is \(n \times k\). Prove that the OLS estimate 
@@ -89,7 +157,14 @@
         - \frac{1}{L} Z X'_{n+1}\widehat{\beta}_n \\
         &= \widehat{\beta}_n + \frac{1}{L}(ZY_{n+1} + ZZ X'_{n+1} Y_{n+1} - ZZ X'_{n+1} Y_{n+1}
         - Z X'_{n+1}\widehat{\beta}_n) \\
-        &= \widehat{\beta}_n + \frac{1}{L}Z(Y_{n+1 - X'_{n+1\widehat{\beta}_n}})
+        &= \widehat{\beta}_n + \frac{1}{L}Z(Y_{n+1} - X'_{n+1}\widehat{\beta}_n)
+    \end{align*}
+
+
+    \item [\textbf{3.19}] For the intercept-only model \( Y_i = \beta + e_i \), show that the leave-one-out prediction error is 
+    
+    \begin{align*}
+        \widetilde{e} = \left( \frac{n}{n-1} \right) \left( Y_i - \overline{Y} \right) 
     \end{align*}
     
 \end{enumerate}

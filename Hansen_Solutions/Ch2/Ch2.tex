@@ -24,6 +24,50 @@
 \maketitle
 
 \begin{enumerate}
+    \item [\textbf{2.01}] Find \(
+        \mathbb{E}[
+            \mathbb{E}[
+                \mathbb{E}[Y | X_1, X_2, X_3]
+            | X_1, X_2] 
+        | X_1]
+    \)
+
+    \answer
+    Step 1: Apply the Law of Iterated Expectations (the smaller conditioning set wins), 
+    starting from the innermost expression.
+
+    \begin{align*}
+        \mathbb{E}[\mathbb{E}[\mathbb{E}[Y | X_1, X_2, X_3] | X_1, X_2] | X_1] &= 
+        \mathbb{E}[\mathbb{E}[Y | X_1, X_2] | X_1] \\
+         &= \mathbb{E}[Y | X_1]
+    \end{align*}
+
+
+    \item [\textbf{2.02}] If \(\mathbb{E}[Y | X] = a + bX\), find \(\mathbb{E}[YX]\) as a function of the moments of X.
+    
+    \answer
+    Step 1: Write \(\mathbb{E}[YX]\) in terms of conditional expecations and apply Conditioning Theorem, where \(g(X) = X\).
+
+    \begin{align*}
+        \mathbb{E}[YX] &= \mathbb{E}[\mathbb{E}[YX | X]] \\
+        &= \mathbb{E}[X \mathbb{E}[Y | X]] \\
+        &= \mathbb{E}[X (a + bX)] \\
+        &= a\mathbb{E}[X] + b\mathbb{E}[X^2]
+    \end{align*}
+
+
+    \item [\textbf{2.15}] Consider the intercept-only model \(Y = \alpha + e\) with \(\alpha\) the best linear predictor. Show that \(\alpha = E[Y]\).
+    
+    \answer
+    Step 1: Use the formula for the best linear predictor. Note that in this case \( \alpha \) takes the place of \( \beta \) and 1 takes the place of \( X \).
+    
+    \begin{align*}
+        \alpha &= X'\left(\mathbb{E}[XX']\right)^{-1}\mathbb{E}[XY] \\
+        &= 1 \cdot \frac{1}{1} \cdot \mathbb{E}[Y] \\
+        &= \mathbb{E}[Y]
+    \end{align*}
+
+
     \item [\textbf{2.17}] 
     Let \(X\) be a random variable with \(\mu = \mathbb{E}[X]\) and \(\sigma^2 = var(X)\). 
     Define
@@ -58,9 +102,44 @@
             &= 0
     \end{align*}
 
-    Step 2:
+    Step 2: Prove the other way around.
     \medskip
     For example, if \(m \neq \mu\), then the law of iterated expectations would be violated.
+
+
+    \item [\textbf{2.18}] Suppose that \( X = (1, X_2, X_3) \) where \( X_3 = \alpha_1 + \alpha_2X_2 \) is a linear function of \( X_2 \). 
+    
+    \begin{enumerate}
+        \item Show that \( \mathbf{Q}_{XX} = \mathbb{E}[XX'] \) is not invertible.
+        
+        \answer
+        Step 1: The condition for invertibility is that there is no non-zero vector \( a \) such that \( a'X = 0 \). Writing things out with \( a = a_1, a_2, a_3 \),
+
+        \begin{align*}
+            a'X &= \begin{bmatrix}
+                a_1 & a_2 & a_3 
+            \end{bmatrix} \begin{bmatrix}
+                1 \\
+                X_2 \\
+                \alpha_1 + \alpha2 X_2
+            \end{bmatrix} \\
+            &= a_1 + a_2X_2 + a_3\alpha_1 + a_3\alpha_2 X_2
+        \end{align*}
+
+        Now, one can set \( a_3 = -1 \), \( a_2 = \alpha_2 \), and \( a_1 = \alpha_1 \), such that
+
+        \begin{align*}
+            a'X &= \alpha_1 + \alpha_2X_2 - \alpha_1 - \alpha_2 X_2 \\
+            &= 0
+        \end{align*}
+
+        \item Use a linear transformation of \( X \) to find an expression for the best linear predictor of \( Y \) given \( X \). 
+        
+        \answer
+        TODO
+        
+    \end{enumerate}
+
 \end{enumerate}
 
 \end{document}
