@@ -1,0 +1,89 @@
+\documentclass[14pt]{extreport}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\(\Leftrightarrow\)\qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip \\}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\sum\limits_{i=1}^n}
+\newcommand{\limn}[0]{\lim_{n \to \infty}}
+\newcommand{\limt}[0]{\lim_{t \to \infty}}
+
+\title{Linear Algebra Review}
+\author{Cangyuan Li}
+\date{\today}
+
+
+\begin{document}
+    
+\maketitle
+
+\section{Basics}
+
+\subsection{Dot Product Rules}
+
+Where \( v \) and \( u \) are vectors, the dot product can be expressed as 
+
+\begin{align*}
+    v \cdot u = v'u = \lVert v \rVert \lVert u \rVert \cos \theta = \sumn v_i u_i,
+\end{align*}
+
+where \( \lVert v \rVert \) is the geometric length of the vector, \( \sqrt{v \cdot v} \).
+
+\begin{enumerate}
+    \item \( v \cdot u = u \cdot v \)
+    \item \( v \cdot (u + v) = v \cdot u + v \cdot v \)
+    \item \( 2v \cdot u = v \cdot 2u \)
+    \item \( (v + u) \cdot (v + u) = v \cdot v + u \cdot v + v \cdot u + u \cdot u \)
+\end{enumerate}
+
+\subsection{Matrix Multiplication}
+
+Two matrices can only be multiplied if they share a dimension. So \( n \times k \times k \times n \)is valid, but \( n \times k \times n \times k \) is not valid. Multiplying matrices can be done column, row, or element-wise. For example, column-wise between a \( 3 \times 3 \) matrix and a \( 3 \times 1 \) vector looks like:
+
+\begin{align*}
+    \begin{bmatrix}
+        a & b & c \\
+        d & e & f \\
+        g & h & i \\
+    \end{bmatrix}
+    \begin{bmatrix}
+        x \\
+        y \\
+        z \\
+    \end{bmatrix} &=
+    x \begin{bmatrix}
+        a \\
+        b \\
+        g \\
+    \end{bmatrix} + 
+    y \begin{bmatrix}
+        b \\
+        e \\
+        h \\
+    \end{bmatrix} + 
+    z \begin{bmatrix}
+        c \\
+        f \\
+        i \\
+    \end{bmatrix}
+\end{align*}
+
+\begin{itemize}
+    \item By entry: \( AB_{ij} = \text{row} A_i \cdot \text{column} B_j \)
+    \item By rows of \(A\): \( i^{th} \text{row of } AB = (i^{th} \text{row of } A)B \)
+    \item By columns of \(B\): \( j^{th} \text{column of } AB = A(j^{th} \text{column of} B) \)
+\end{itemize}
+
+\section{Row-Reduced Echelon Form}
+
+
+
+
+\end{document}

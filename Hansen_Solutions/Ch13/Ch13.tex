@@ -1,0 +1,95 @@
+\documentclass[14pt]{extreport}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
+\usepackage{amsmath}
+
+\title{Solutions to Chapter 13 Exercises}
+\author{Cangyuan Li}
+\date{\today}
+
+\newcommand{\ddfrac}[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\eq}[0]{\llap{\( \Leftrightarrow \) \qquad}}
+\newcommand{\answer}[0]{\medskip \textbf{Answer:} \medskip \\}
+\newcommand{\union}[0]{\cup}
+\newcommand{\intersect}[0]{\cap}
+\newcommand{\sumn}[0]{\( \sum\limits_{i=1}^n \)}
+\newcommand{\limn}[0]{\( \lim_{n \to \infty}\)}
+\newcommand{\limt}[0]{\( \lim_{t \to \infty} \)} 
+
+\begin{document}
+    
+\maketitle
+
+\begin{enumerate}
+    \item [\textbf{13.21}] Take the linear equation \( Y = X'\beta + e \) and consider the following estimators of \( \beta \).
+    
+        \begin{enumerate}
+            \item \( \widehat{\beta} \): 2SLS using the instruments \( Z_1 \).
+            \item \( \widetilde{\beta} \): 2SLS using the instruments \( Z_2 \).
+            \item \( \overline{\beta} \): GMM using the instruments \( Z = (Z_1, Z_2)\) and the weight matrix
+            
+            \begin{align*}
+                W &= \begin{pmatrix}
+                    \left( \mathbf{Z_1' \; Z_2'}^{-1}  \right)\lambda & 0 \\
+                    0 & \left( \mathbf{Z_1' \; Z_2'}^{-1}  \right) \left( 1 - \lambda \right)
+                \end{pmatrix}
+            \end{align*}
+            for \( \lambda \in (0, 1) \).
+        \end{enumerate}
+
+        Find an expression for \( \overline{\beta} \) which shows that it is a specific weighted average of \( \widehat{\beta} \) and \( \widetilde{\beta} \).
+
+    \answer
+
+    Step 1: $\overline{\beta} = \mathbf{(X'ZWZ'X)}^{-1}\mathbf{(X'ZWZ'Y)}$
+
+    \begin{align*}
+        \mathbf{ZWZ}' &= 
+        \begin{bmatrix}
+        \mathbf{Z_1} & \mathbf{Z_2}
+        \end{bmatrix} 
+        \begin{bmatrix}
+        (\mathbf{Z_1}'\mathbf{Z_1})^{-1}\lambda & \mathbf{O} \\
+        \mathbf{O} & (\mathbf{Z_2}'\mathbf{Z_2})^{-1}(1-\lambda) \\
+        \end{bmatrix}
+        \begin{bmatrix}
+        \mathbf{Z_1}' \\
+        \mathbf{Z_2}'
+        \end{bmatrix} \\
+        &= 
+        \begin{bmatrix}
+        \mathbf{Z_1}(\mathbf{Z_1}'\mathbf{Z_1})^{-1}\lambda & \mathbf{Z_2}(\mathbf{Z_2}'\mathbf{Z_2})^{-1}(1-\lambda)
+        \end{bmatrix}
+        \begin{bmatrix}
+        \mathbf{Z_1}' \\
+        \mathbf{Z_2}'
+        \end{bmatrix} \\
+        &= \mathbf{Z_1}(\mathbf{Z_1}'\mathbf{Z_1})^{-1}\mathbf{Z_1}'\lambda + \mathbf{Z_2}(\mathbf{Z_2}'\mathbf{Z_2})^{-1}\mathbf{Z_2}'(1-\lambda)
+    \end{align*}
+
+    \begin{multline*}
+        \overline{\beta} = \Big(\mathbf{X}'\mathbf{Z_1}(\mathbf{Z_1}'\mathbf{Z_1})^{-1}\mathbf{Z_1}'\mathbf{X}\lambda + \mathbf{X}'\mathbf{Z_2}(\mathbf{Z_2}'\mathbf{Z_2})^{-1}\mathbf{Z_2}'\mathbf{X}(1-\lambda)\Big)^{-1} \\ \Big(\mathbf{X}'\mathbf{Z_1}(\mathbf{Z_1}'\mathbf{Z_1})^{-1}\mathbf{Z_1}'\mathbf{Y}\lambda + \mathbf{X}'\mathbf{Z_2}(\mathbf{Z_2}'\mathbf{Z_2})^{-1}\mathbf{Z_2}'\mathbf{Y}(1-\lambda)\Big)
+    \end{multline*}
+
+    Step 2: 
+
+    \begin{align*}
+        \widehat{\beta} &= \mathbf{(X'Z_1(Z_1'Z_1)^{-1}Z_1'X)^{-1}X'Z_1(Z_1'Z_1)^{-1}Z_1'Y}
+    \end{align*}
+
+    \begin{align*}
+        \widetilde{\beta} &= \mathbf{(X'Z_2(Z_2'Z_2)^{-1}Z_2'X)^{-1}X'Z_2(Z_2'Z_2)^{-1}Z_2'Y}
+    \end{align*}
+
+    Step 3: Let \( A_j := \mathbf{X'Z_j(Z_j'Z_j)^{-1}Z_j'X} \) and \( B_j := \mathbf{X'Z_j(Z_j'Z_j)^{-1}Z_j'Y} \)
+
+    \begin{align*}
+        \overline{\beta} &= \Big(\mathbf{A_1}\lambda + \mathbf{A_2}(1-\lambda)\Big)^{-1}\Big(\mathbf{A_1A_1^{-1}B_1}\lambda + \mathbf{A_2A_2^{-1}B_2}(1-\lambda)\Big) \\
+        &= \Big(\mathbf{A_1}\lambda + \mathbf{A_2}(1-\lambda)\Big)^{-1}\Big(\mathbf{A_1}\widehat{\beta}\lambda + \mathbf{A_2}\widetilde{\beta}(1-\lambda)\Big)
+    \end{align*}
+
+
+\end{enumerate}
+
+\end{document}

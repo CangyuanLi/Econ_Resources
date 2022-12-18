@@ -1,1 +1,1 @@
-Econ stuff- Not guaranteed to correct and definitely not complete
+Notes, textbook solutions, and data
